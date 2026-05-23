@@ -21,6 +21,7 @@
 const ALLOWED_ORIGINS = [
   "https://arqagents.com",
   "https://www.arqagents.com",
+  "https://arqagents-web.pages.dev",
   "http://localhost:5500",          // VS Code Live Server
   "http://127.0.0.1:5500",
   "http://localhost:3000",
@@ -29,9 +30,9 @@ const ALLOWED_ORIGINS = [
 ];
 
 const ALLOWED_MODELS = new Set([
-  "claude-sonnet-4-20250514",
-  "claude-opus-4-20250514",
-  "claude-haiku-4-5-20251001",
+  "claude-haiku-4-5",
+  "claude-sonnet-4-6",
+  "claude-opus-4-6",
 ]);
 
 const DEFAULT_MODEL  = "claude-sonnet-4-20250514";
