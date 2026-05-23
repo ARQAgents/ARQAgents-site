@@ -1,0 +1,22 @@
+# ════════════════════════════════════════════════════════════════
+#  Cloudflare Worker config for ARQAgents Claude proxy
+# ════════════════════════════════════════════════════════════════
+#  After deploying, your Worker will be reachable at:
+#    https://arqagents-chat.<YOUR-CF-USERNAME>.workers.dev
+#  Or bind it to a custom subdomain like:
+#    https://api.arqagents.com
+# ════════════════════════════════════════════════════════════════
+
+name = "arqagents-chat"
+main = "worker.js"
+compatibility_date = "2025-05-01"
+
+# OPTIONAL: bind the Worker to a custom route under arqagents.com
+# Uncomment after your domain is on Cloudflare (it already is!)
+# [[routes]]
+# pattern = "api.arqagents.com/*"
+# zone_name = "arqagents.com"
+# custom_domain = true
+
+# Secrets are NOT stored here. Set them with:
+#   wrangler secret put ANTHROPIC_API_KEY

@@ -1,0 +1,20 @@
+# ════════════════════════════════════════════════════════════════
+#  ARQAgents.com — Netlify configuration
+#  (Vercel users can ignore this — use vercel.json instead)
+# ════════════════════════════════════════════════════════════════
+
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options        = "SAMEORIGIN"
+    Referrer-Policy        = "strict-origin-when-cross-origin"
+    Permissions-Policy     = "camera=(), microphone=(), geolocation=()"
+
+[[redirects]]
+  from = "/*"
+  to   = "/index.html"
+  status = 200

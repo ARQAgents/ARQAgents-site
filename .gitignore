@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Local env files (NEVER commit these)
+.env
+.env.local
+.env.*.local
+
+# Supabase
+supabase/.temp/
+supabase/.branches/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+npm-debug.log*
+
+# Build output
+dist/
+.vercel/
+.netlify/
