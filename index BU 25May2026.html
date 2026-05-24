@@ -1622,47 +1622,6 @@ footer {
   .mock-crm-row > *:nth-child(5) { display:none; }
   .mock-site-features { grid-template-columns:1fr; }
 }
-/* ── [ADD THIS TO YOUR EXISTING <style> BLOCK] ── */
-
-/* ── MOBILE RESPONSIVE FIXES ──────────────────────────────────────────── */
-@media (max-width: 768px) {
-  /* Reduce padding for tighter mobile layout */
-  nav { padding: 1rem 1.5rem; }
-  section { padding: 4rem 1.5rem; }
-  
-  /* Hero Title Adjustment */
-  h1.hero-title {
-    font-size: clamp(2.5rem, 12vw, 3.5rem); /* Scales title down */
-    word-break: break-word; /* Prevents overflow */
-  }
-  
-  /* Switch grids to single column */
-  .services-header, .demo-grid, .stats-grid {
-    grid-template-columns: 1fr !important;
-    gap: 2rem;
-  }
-  
-  .services-grid, .steps-grid, .testi-grid, .pricing-grid {
-    grid-template-columns: 1fr !important;
-  }
-  
-  /* Adjusting specific card spacings */
-  .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
-  .stat-item:last-child { border-bottom: none; }
-  
-  /* Ensure chat widget stays visible */
-  .chat-widget { width: 100%; margin-top: 2rem; }
-  
-  /* Center buttons on mobile */
-  .hero-cta { flex-direction: column; gap: 0.8rem; }
-  .btn-primary, .btn-ghost { width: 100%; }
-}
-
-@media (max-width: 480px) {
-  /* Extra small devices (phones) */
-  h1.hero-title { font-size: 2.2rem; }
-  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-}
 </style>
 <!-- Anime.js v3 -->
 <!-- Anime.js — primary CDN (no SRI hash so it can't be blocked by a mismatch) -->
