@@ -3071,7 +3071,7 @@ async function sendDemo(){
   try{
     const res = await callClaude({
       model: CLAUDE_MODEL, max_tokens:MAX_TOKENS_PER_REPLY,
-      system:DEMO_SYSTEM,
+      system: DEMO_SYSTEM + getCurrentDayInfo(),
       messages:demoMsgs.map(m=>({role:m.role,content:m.content}))
     });
     if(!res.ok){ const e=await res.json().catch(()=>({})); throw new Error(e.error?.message || e.error || 'HTTP '+res.status); }
@@ -3125,6 +3125,28 @@ function toggleMiniChat(){
     anime({ targets:panel, opacity:[0,1], translateY:[20,0], scale:[.96,1], duration:320, easing:'easeOutBack' });
   }
 }
+// Returns current day & time info for the AI
+function getCurrentDayInfo() {
+  const now = new Date();
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const today = days[now.getDay()];
+  const hour  = now.getHours();
+  const time  = now.toLocaleTimeString('en-PH', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'Asia/Manila' });
+  const date  = now.toLocaleDateString('en-PH', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', timeZone: 'Asia/Manila' });
+  
+  // Business hours: Mon-Sat 9am-6pm PHT
+  const isWeekday = now.getDay() >= 1 && now.getDay() <= 6;
+  const isOpenHours = hour >= 9 && hour < 18;
+  const isOpenNow = isWeekday && isOpenHours;
+  
+  return `\n\n═══ CURRENT TIME INFO (PHT) ═══
+Today is: ${date}
+Current time: ${time}
+Day of week: ${today}
+Business status RIGHT NOW: ${isOpenNow ? 'OPEN ✅' : 'CLOSED ❌'}
+${!isOpenNow ? (today === 'Sunday' ? 'We are closed today (Sunday). We open tomorrow at 9am.' : 'Outside business hours (Mon-Sat 9am-6pm PHT).') : ''}
+Always use this current info when answering questions about hours, "today", "now", or "open".`;
+}
 
 async function sendMini(){
   if(!chatConfigured()){
@@ -3165,7 +3187,7 @@ async function sendMini(){
   td.innerHTML=`<div class="typing-dots"><div class="typing-dot" style="animation:blink 1.2s 0s infinite"></div><div class="typing-dot" style="animation:blink 1.2s .2s infinite"></div><div class="typing-dot" style="animation:blink 1.2s .4s infinite"></div></div>`;
   c.appendChild(td); c.scrollTop=c.scrollHeight;
   try{
-    const res = await callClaude({model:CLAUDE_MODEL,max_tokens:MAX_TOKENS_PER_REPLY,system:MINI_SYSTEM,messages:miniMsgs.map(m=>({role:m.role,content:m.content}))});
+    const res = await callClaude({model:CLAUDE_MODEL,max_tokens:MAX_TOKENS_PER_REPLY,system: MINI_SYSTEM + getCurrentDayInfo(),messages:miniMsgs.map(m=>({role:m.role,content:m.content}))});
     if(!res.ok){ const e=await res.json().catch(()=>({})); throw new Error(e.error?.message || e.error || 'HTTP '+res.status); }
     const data=await res.json();
     const reply=data.content?.[0]?.text||'...';
