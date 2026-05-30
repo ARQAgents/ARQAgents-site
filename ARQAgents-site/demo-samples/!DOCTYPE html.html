@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sales Invoice - Manila East School Supplies</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px;
+            color: #2d3748;
+            background-color: #ffffff;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .invoice-container {
+            max-width: 850px;
+            margin: 0 auto;
+            border: 1px solid #e2e8f0;
+            padding: 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+        .header-table td {
+            vertical-align: top;
+            padding: 0;
+        }
+        .company-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a365d;
+            text-transform: uppercase;
+            margin: 0 0 6px 0;
+        }
+        .company-subtitle {
+            font-size: 12px;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+        .invoice-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2b6cb0;
+            text-align: right;
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .invoice-meta {
+            text-align: right;
+            font-size: 13px;
+            color: #2d3748;
+            line-height: 1.6;
+        }
+        .invoice-meta strong {
+            color: #1a365d;
+        }
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+        }
+        .details-table td {
+            width: 50%;
+            padding: 15px;
+            vertical-align: top;
+        }
+        .details-title {
+            font-size: 11px;
+            font-weight: bold;
+            color: #2b6cb0;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+        .details-text {
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        .items-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        .items-table th {
+            background-color: #1a365d;
+            color: #ffffff;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            padding: 8px 10px;
+            text-align: left;
+            border: 1px solid #1a365d;
+        }
+        .items-table th.num { text-align: center; width: 5%; }
+        .items-table th.desc { width: 45%; }
+        .items-table th.qty { text-align: center; width: 8%; }
+        .items-table th.unit { width: 10%; }
+        .items-table th.price { text-align: right; width: 16%; }
+        .items-table th.amount { text-align: right; width: 16%; }
+        
+        .items-table td {
+            padding: 6px 10px;
+            border: 1px solid #e2e8f0;
+            vertical-align: middle;
+        }
+        .items-table tr:nth-child(even) {
+            background-color: #fcfdfd;
+        }
+        .items-table td.num, .items-table td.qty { text-align: center; }
+        .items-table td.price, .items-table td.amount { text-align: right; }
+        
+        .summary-wrapper {
+            width: 100%;
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        .summary-table {
+            width: 40%;
+            border-collapse: collapse;
+            margin-left: auto;
+        }
+        .summary-table td {
+            padding: 6px 10px;
+            border: 1px solid #e2e8f0;
+            font-size: 13px;
+        }
+        .summary-table td.label {
+            font-weight: 600;
+            color: #4a5568;
+            background-color: #f7fafc;
+            width: 50%;
+        }
+        .summary-table td.val {
+            text-align: right;
+            font-weight: 600;
+            width: 50%;
+        }
+        .summary-table tr.grand-total td {
+            background-color: #2b6cb0;
+            color: #ffffff;
+            border-color: #2b6cb0;
+            font-size: 14px;
+        }
+        .footer-note {
+            margin-top: 35px;
+            font-size: 11px;
+            color: #718096;
+            text-align: center;
+            border-top: 1px dashed #e2e8f0;
+            padding-top: 15px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="invoice-container">
+    <!-- Header Section -->
+    <table class="header-table">
+        <tr>
+            <td>
+                <div class="company-title">Manila East School Supplies Corp.</div>
+                <div class="company-subtitle">
+                    Block 5, Lot 12, Corporate Avenue, Ortigas Center<br>
+                    Pasig City, Metro Manila, Philippines 1605<br>
+                    TIN: 008-234-567-000 | Tel: +63 (02) 8812-3456
+                </div>
+            </td>
+            <td>
+                <div class="invoice-title">Sales Invoice</div>
+                <div class="invoice-meta">
+                    <strong>Invoice No:</strong> ME-2026-8941<br>
+                    <strong>Date:</strong> May 15, 2026<br>
+                    <strong>Payment Terms:</strong> Net 30 Days<br>
+                    <strong>PO Number:</strong> PO-99321
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Billing Details -->
+    <table class="details-table">
+        <tr>
+            <td>
+                <div class="details-title">Bill To</div>
+                <div class="details-text">
+                    <strong>Apex Development Bank Philippines</strong><br>
+                    12th Floor, Tower B, Ayala Avenue Corner Paseo de Roxas<br>
+                    Makati City, Metro Manila, Philippines 1226<br>
+                    TIN: 000-412-883-000
+                </div>
+            </td>
+            <td>
+                <div class="details-title">Ship To</div>
+                <div class="details-text">
+                    <strong>Apex Development Bank - Operations Hub</strong><br>
+                    G/F Logistics Center, Dynamic Street, West Rembo<br>
+                    Taguig City, Metro Manila, Philippines 1640<br>
+                    Attn: Procurement & Property Management Dept.
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Items Table -->
+    <table class="items-table">
+        <thead>
+            <tr>
+                <th class="num">#</th>
+                <th class="desc">Item Description</th>
+                <th class="qty">Qty</th>
+                <th class="unit">Unit</th>
+                <th class="price">Unit Price (PHP)</th>
+                <th class="amount">Amount (PHP)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td class="num">1</td><td>HB Graphite Pencils No. 2 (12 pcs/box)</td><td class="qty">15</td><td>Box</td><td class="price">85.00</td><td class="amount">1,275.00</td></tr>
+            <tr><td class="num">2</td><td>Ballpoint Pen Fine 0.5mm Black (25 pcs/box)</td><td class="qty">20</td><td>Box</td><td class="price">240.00</td><td class="amount">4,800.00</td></tr>
+            <tr><td class="num">3</td><td>Ballpoint Pen Fine 0.5mm Blue (25 pcs/box)</td><td class="qty">20</td><td>Box</td><td class="price">240.00</td><td class="amount">4,800.00</td></tr>
+            <tr><td class="num">4</td><td>Gel Pen Retractable 0.7mm Red (12 pcs/box)</td><td class="qty">5</td><td>Box</td><td class="price">320.00</td><td class="amount">1,600.00</td></tr>
+            <tr><td class="num">5</td><td>Fluorescent Highlighter Assorted Colors (5 pcs/set)</td><td class="qty">12</td><td>Set</td><td class="price">145.00</td><td class="amount">1,740.00</td></tr>
+            <tr><td class="num">6</td><td>Whiteboard Marker Bullet Tip Black</td><td class="qty">30</td><td>Pc</td><td class="price">45.00</td><td class="amount">1,350.00</td></tr>
+            <tr><td class="num">7</td><td>Permanent Marker Fine Tip Blue</td><td class="qty">25</td><td>Pc</td><td class="price">42.00</td><td class="amount">1,050.00</td></tr>
+            <tr><td class="num">8</td><td>Correction Tape 5mm x 12m (Eco-Pack)</td><td class="qty">40</td><td>Pc</td><td class="price">38.00</td><td class="amount">1,520.00</td></tr>
+            <tr><td class="num">9</td><td>Rubber Eraser Large White</td><td class="qty">30</td><td>Pc</td><td class="price">12.00</td><td class="amount">360.00</td></tr>
+            <tr><td class="num">10</td><td>Premium Copy Paper A4 80gsm (500 sheets/ream)</td><td class="qty">120</td><td>Ream</td><td class="price">225.00</td><td class="amount">27,000.00</td></tr>
+            <tr><td class="num">11</td><td>Premium Copy Paper Letter 80gsm (500 sheets/ream)</td><td class="qty">100</td><td>Ream</td><td class="price">210.00</td><td class="amount">21,000.00</td></tr>
+            <tr><td class="num">12</td><td>Premium Copy Paper Legal 80gsm (500 sheets/ream)</td><td class="qty">50</td><td>Ream</td><td class="price">245.00</td><td class="amount">12,250.00</td></tr>
+            <tr><td class="num">13</td><td>Sticky Notes 3x3 Inches Yellow (100 sheets/pad)</td><td class="qty">60</td><td>Pad</td><td class="price">35.00</td><td class="amount">2,100.00</td></tr>
+            <tr><td class="num">14</td><td>Sticky Notes Flag Flags Assorted Neon</td><td class="qty">40</td><td>Pack</td><td class="price">55.00</td><td class="amount">2,200.00</td></tr>
+            <tr><td class="num">15</td><td>Clear Sheet Protectors A4 Premium (100 pcs/pack)</td><td class="qty">15</td><td>Pack</td><td class="price">180.00</td><td class="amount">2,700.00</td></tr>
+            <tr><td class="num">16</td><td>Expanding Plastic Envelope with Handle Legal</td><td class="qty">25</td><td>Pc</td><td class="price">75.00</td><td class="amount">1,875.00</td></tr>
+            <tr><td class="num">17</td><td>Two-Hole Heavy Duty Paper Puncher (30 sheets)</td><td class="qty">6</td><td>Pc</td><td class="price">480.00</td><td class="amount">2,880.00</td></tr>
+            <tr><td class="num">18</td><td>Standard Desktop Stapler #35 Chrome</td><td class="qty">12</td><td>Pc</td><td class="price">285.00</td><td class="amount">3,420.00</td></tr>
+            <tr><td class="num">19</td><td>Staple Wire No. 35 Premium (5000/box)</td><td class="qty">30</td><td>Box</td><td class="price">45.00</td><td class="amount">1,350.00</td></tr>
+            <tr><td class="num">20</td><td>Heavy Duty Binder Clips 50mm (12 pcs/box)</td><td class="qty">15</td><td>Box</td><td class="price">65.00</td><td class="amount">975.00</td></tr>
+            <tr><td class="num">21</td><td>Paper Clips Jumbo Vinyl Coated 50mm</td><td class="qty">40</td><td>Box</td><td class="price">28.00</td><td class="amount">1,120.00</td></tr>
+            <tr><td class="num">22</td><td>Stainless Steel Scissors 8-Inch Office</td><td class="qty">15</td><td>Pc</td><td class="price">88.00</td><td class="amount">1,320.00</td></tr>
+            <tr><td class="num">23</td><td>Transparent Desk Tape 18mm x 33m</td><td class="qty">50</td><td>Roll</td><td class="price">22.00</td><td class="amount">1,100.00</td></tr>
+            <tr><td class="num">24</td><td>Packaging Tape Brown 2-Inch x 50m</td><td class="qty">24</td><td>Roll</td><td class="price">48.00</td><td class="amount">1,152.00</td></tr>
+            <tr><td class="num">25</td><td>Glue Stick Non-Toxic 21g</td><td class="qty">35</td><td>Pc</td><td class="price">32.00</td><td class="amount">1,120.00</td></tr>
+            <tr><td class="num">26</td><td>File Index Divider 5-Tab A4 Multi-Color</td><td class="qty">30</td><td>Set</td><td class="price">40.00</td><td class="amount">1,200.00</td></tr>
+            <tr><td class="num">27</td><td>Lever Arch File Folder Legal Blue</td><td class="qty">40</td><td>Pc</td><td class="price">115.00</td><td class="amount">4,600.00</td></tr>
+        </tbody>
+    </table>
+
+    <!-- Summary Section -->
+    <div class="summary-wrapper">
+        <table class="summary-table">
+            <tr>
+                <td class="label">Subtotal</td>
+                <td class="val">107,857.00</td>
+            </tr>
+            <tr>
+                <td class="label">12% VAT</td>
+                <td class="val">12,942.84</td>
+            </tr>
+            <tr class="grand-total">
+                <td class="label">Total (PHP)</td>
+                <td class="val">₱120,799.84</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- PH Tax Footnotes -->
+    <div class="footer-note">
+        Thank you for your business!<br>
+        Make all checks payable to <strong>Manila East School Supplies Corp.</strong><br>
+        <span style="font-size: 10px; color: #a0aec0; font-weight: bold;">THIS DOCUMENT IS NOT VALID FOR CLAIM OF INPUT TAX. AN OFFICIAL RECEIPT WILL BE ISSUED UPON PAYMENT.</span><br>
+        Form No. ME-SI-2025 | BIR Authority to Print No. 9AU00028374-2025
+    </div>
+</div>
+
+</body>
+</html>
