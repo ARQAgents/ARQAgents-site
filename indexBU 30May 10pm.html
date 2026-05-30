@@ -4283,7 +4283,7 @@ document.addEventListener('keydown', e => {
           <button class="bk-sample" type="button" data-sample="phone-photo">📸 Phone photo receipt</button>
         </div>
         <div class="bk-trust">
-          <div class="bk-trust-item">⚡ <strong>30-second average</strong> · vs ~4 min manual entry</div>
+          <div class="bk-trust-item">⚡ <strong>4-second average</strong> · vs ~4 min manual entry</div>
           <div class="bk-trust-item">🎯 <strong>Auto-categorized</strong> to your chart of accounts</div>
           <div class="bk-trust-item">🔒 <strong>Auto-deleted</strong> after 24 hours</div>
         </div>
@@ -4342,7 +4342,7 @@ document.addEventListener('keydown', e => {
 
         <div class="bk-cta-band">
           <div class="bk-cta-text">Want this for your business?</div>
-          <a href="#" class="bk-cta-link" id="bk-cta-link" onclick="event.preventDefault();document.getElementById('bk-overlay').classList.remove('open');document.body.style.overflow='';if(typeof openBooking==='function')openBooking();">Talk to us →</a>
+          <a href="#contact" class="bk-cta-link" id="bk-cta-link">Talk to us →</a>
         </div>
       </div>
 
@@ -4453,22 +4453,17 @@ document.addEventListener('keydown', e => {
   document.querySelectorAll('.bk-sample').forEach(function (btn) {
     btn.addEventListener('click', function () {
       const which = btn.getAttribute('data-sample');
-      const isPdf = which === 'clean-pdf';
-      const url = isPdf
+      const url = which === 'clean-pdf'
         ? '/demo-samples/clean-invoice.pdf'
         : '/demo-samples/phone-photo-receipt.jpg';
-      const forcedMime = isPdf ? 'application/pdf' : 'image/jpeg';
       fetch(url)
-        .then(function (r) { if (!r.ok) throw new Error('Sample not found (HTTP ' + r.status + ')'); return r.blob(); })
+        .then(function (r) { if (!r.ok) throw new Error('Sample not found'); return r.blob(); })
         .then(function (blob) {
-          const filename = url.split('/').pop() || 'sample';
-          // Force the correct MIME type — Cloudflare may serve PDFs as
-          // application/octet-stream which would fail our handleFile check.
-          const typedBlob = new Blob([blob], { type: forcedMime });
-          handleFile(new File([typedBlob], filename, { type: forcedMime }));
+          const filename = url.split('/').pop() || 'sample.pdf';
+          handleFile(new File([blob], filename, { type: blob.type }));
         })
-        .catch(function (err) {
-          showError('Sample not available: ' + (err && err.message ? err.message : 'unknown error') + '. Please upload your own file.');
+        .catch(function () {
+          alert('Sample not available right now — please upload your own invoice or receipt.');
         });
     });
   });
