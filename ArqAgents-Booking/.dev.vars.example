@@ -1,0 +1,11 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Local dev secrets (used by `wrangler dev`).
+# Copy this file to `.dev.vars` and fill in real values.
+# In production, set the same names via `wrangler secret put NAME`.
+# ─────────────────────────────────────────────────────────────────────────────
+ANTHROPIC_API_KEY = "sk-ant-..."
+RESEND_API_KEY = "re_..."
+SEMAPHORE_API_KEY = ""
+ADMIN_TOKEN = "pick-a-long-random-string"
+OWNER_EMAIL = "you@example.com"
+OWNER_PHONE = ""

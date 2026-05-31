@@ -1,0 +1,18 @@
+{
+  "name": "arqagents-booking",
+  "version": "1.0.0",
+  "description": "ARQAgents booking & reminders Cloudflare Worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:create": "wrangler d1 create arqagents-bookings",
+    "db:migrate": "wrangler d1 execute arqagents-bookings --remote --file=./schema.sql",
+    "db:migrate:local": "wrangler d1 execute arqagents-bookings --local --file=./schema.sql",
+    "tail": "wrangler tail"
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.0"
+  }
+}

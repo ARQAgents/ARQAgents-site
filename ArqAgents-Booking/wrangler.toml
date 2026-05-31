@@ -1,0 +1,54 @@
+#:schema node_modules/wrangler/config-schema.json
+# ──────────────────────────────────────────────────────────────────────────────
+# ARQAgents Booking Worker — Cloudflare config
+# ──────────────────────────────────────────────────────────────────────────────
+# Setup steps:
+#   1. npm install -g wrangler
+#   2. wrangler login
+#   3. wrangler d1 create arqagents-bookings   (copy the database_id below)
+#   4. wrangler d1 execute arqagents-bookings --remote --file=./schema.sql
+#   5. Set secrets (see README)
+#   6. wrangler deploy
+# ──────────────────────────────────────────────────────────────────────────────
+
+name = "arqagents-booking"
+main = "src/index.js"
+compatibility_date = "2025-05-01"
+
+# Allow CORS preflight & response from your site
+[vars]
+ALLOWED_ORIGIN = "*"
+BUSINESS_NAME = "ARQAgents"
+BUSINESS_TIMEZONE = "Asia/Manila"
+BUSINESS_HOURS_START = "09:00"
+BUSINESS_HOURS_END = "17:00"
+BUSINESS_DAYS = "1,2,3,4,5"        # 1=Mon ... 7=Sun
+SLOT_MINUTES = "30"
+BOOKING_LEAD_HOURS = "2"            # earliest a visitor can book from now
+BOOKING_HORIZON_DAYS = "30"         # farthest in the future they can book
+SURVEY_URL = "https://arqagents.com/survey"
+REPLY_TO_EMAIL = "hello@arqagents.com"
+FROM_EMAIL = "ARQAgents <hello@arqagents.com>"   # change after verifying your domain in Resend
+SMS_SENDER_NAME = "ARQAGENTS"        # registered Semaphore sender name (max 11 chars)
+CLAUDE_MODEL = "claude-haiku-4-5"
+
+# ── D1 database binding ──────────────────────────────────────────────────────
+# After `wrangler d1 create arqagents-bookings`, paste the database_id here.
+[[d1_databases]]
+binding = "DB"
+database_name = "arqagents-bookings"
+database_id = "24c6632b-2091-474a-b405-4f305c401533"
+
+# ── Cron triggers (UTC) ──────────────────────────────────────────────────────
+# Runs every 30 minutes. Inside the handler we decide what to do based on
+# Manila local time — keeps timezone math in one place.
+[triggers]
+crons = ["*/30 * * * *"]
+
+# ── Secrets (set via CLI, NOT in this file) ──────────────────────────────────
+# wrangler secret put ANTHROPIC_API_KEY
+# wrangler secret put RESEND_API_KEY
+# wrangler secret put SEMAPHORE_API_KEY
+# wrangler secret put ADMIN_TOKEN
+# wrangler secret put OWNER_EMAIL          # gets a copy of every booking
+# wrangler secret put OWNER_PHONE          # optional, gets SMS copy
