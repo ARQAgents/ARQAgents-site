@@ -3375,12 +3375,13 @@ function useSuggestion(btn, text){
   sendDemo();
 }
 
+function escMsg(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>'); }
 function appendMsg(container, role, text){
   const d = document.createElement('div');
   d.className = 'msg ' + role;
   const b = document.createElement('div');
   b.className = 'msg-bubble';
-  b.textContent = text;
+  b.innerHTML = escMsg(text);
   d.appendChild(b);
   container.appendChild(d);
   container.scrollTop = container.scrollHeight;
@@ -3612,7 +3613,7 @@ async function sendMini(){
   const ud=document.createElement('div'); ud.className='msg user';
   const ub=document.createElement('div'); ub.className='msg-bubble';
   ub.style.cssText='max-width:85%;padding:.6rem .85rem;font-size:.82rem;line-height:1.5;background:var(--gold);color:#000;border-radius:12px 12px 4px 12px;';
-  ub.textContent=text; ud.appendChild(ub); c.appendChild(ud);
+  ub.innerHTML=escMsg(text); ud.appendChild(ub); c.appendChild(ud);
   anime({ targets:ud, opacity:[0,1], translateX:[12,0], duration:250, easing:'easeOutQuad' });
   const td=document.createElement('div'); td.className='msg ai'; td.id='mini-typing';
   td.innerHTML=`<div class="typing-dots"><div class="typing-dot" style="animation:blink 1.2s 0s infinite"></div><div class="typing-dot" style="animation:blink 1.2s .2s infinite"></div><div class="typing-dot" style="animation:blink 1.2s .4s infinite"></div></div>`;
@@ -3630,7 +3631,7 @@ async function sendMini(){
     const ad=document.createElement('div'); ad.className='msg ai';
     const ab=document.createElement('div'); ab.className='msg-bubble';
     ab.style.cssText='max-width:90%;padding:.6rem .85rem;font-size:.82rem;line-height:1.5;background:var(--card);border:1px solid var(--border);border-radius:4px 12px 12px 12px;color:var(--white);';
-    ab.textContent=reply; ad.appendChild(ab); c.appendChild(ad); c.scrollTop=c.scrollHeight;
+    ab.innerHTML=escMsg(reply); ad.appendChild(ab); c.appendChild(ad); c.scrollTop=c.scrollHeight;
     anime({ targets:ad, opacity:[0,1], translateX:[-10,0], duration:250, easing:'easeOutQuad' });
     if(tokensUsedThisSession >= SESSION_TOKEN_BUDGET){
       const ld=document.createElement('div'); ld.className='msg ai';
@@ -3646,7 +3647,7 @@ async function sendMini(){
     const ad=document.createElement('div'); ad.className='msg ai';
     const ab=document.createElement('div'); ab.className='msg-bubble';
     ab.style.cssText='max-width:90%;padding:.6rem .85rem;font-size:.82rem;line-height:1.5;background:var(--card);border:1px solid var(--border);border-radius:4px 12px 12px 12px;color:var(--white);';
-    ab.textContent='Error: '+err.message; ad.appendChild(ab); c.appendChild(ad); c.scrollTop=c.scrollHeight;
+    ab.innerHTML=escMsg('Error: '+err.message); ad.appendChild(ab); c.appendChild(ad); c.scrollTop=c.scrollHeight;
   }
   miniLoading=false;
   document.getElementById('mini-send').disabled=false;
