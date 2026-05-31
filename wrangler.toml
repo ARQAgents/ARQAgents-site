@@ -7,7 +7,7 @@
 #    https://api.arqagents.com
 # ════════════════════════════════════════════════════════════════
 
-name = "arqagents-chat"
+name = "arqagents"
 main = "worker.js"
 compatibility_date = "2025-05-01"
 
