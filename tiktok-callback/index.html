@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Connecting TikTok — ARQAgents</title>
+<style>body{margin:0;background:#0c0c0f;color:#f5f5f7;font:16px/1.7 system-ui,sans-serif;display:grid;place-items:center;min-height:100vh;text-align:center}a{color:#FCD116}</style>
+</head>
+<body>
+<div>
+  <p>Connecting TikTok…</p>
+  <p style="color:#909098;font-size:14px">If nothing happens, make sure ARQAgents Poster is running on this computer.</p>
+</div>
+<script>
+// Relay TikTok's OAuth response to the local ARQAgents Poster app running on the user's own computer.
+var src = new URLSearchParams(location.search), out = new URLSearchParams();
+['code', 'state', 'scopes', 'error', 'error_description'].forEach(function (k) { if (src.has(k)) out.set(k, src.get(k)); });
+location.replace('http://localhost:3100/tiktok/callback?' + out.toString());
+</script>
+</body>
+</html>
